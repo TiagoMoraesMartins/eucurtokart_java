@@ -9,6 +9,7 @@ public class Usuario implements Serializable {
 
     private Long id;
     private String nome;
+    private String email;
     private LocalDate dataNascimento;
     private String sexo;
     private String uf;
@@ -25,16 +26,19 @@ public class Usuario implements Serializable {
     private String telefoneEstabelecimento;
     private String celular;
 
-    public Usuario() {
-
+    public Usuario(Long id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
     }
 
-    public Usuario(Long id, String nome, LocalDate dataNascimento, String sexo,
+    public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo,
             String uf, String cidade, String rua, String numero, String bairro, String cep,
             Double peso, Double altura, String foto, String tipoUsuario, String nomeContato,
             String telefoneEstabelecimento, String celular) {
         this.id = id;
         this.nome = nome;
+        this.email = email;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.uf = uf;
@@ -78,6 +82,20 @@ public class Usuario implements Serializable {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    /**
+     * @return String return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param nome the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
