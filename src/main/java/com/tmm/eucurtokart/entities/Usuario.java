@@ -2,6 +2,10 @@ package com.tmm.eucurtokart.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Usuario implements Serializable {
 
@@ -25,6 +29,14 @@ public class Usuario implements Serializable {
     private String nomeContato;
     private String telefoneEstabelecimento;
     private String celular;
+    private LocalDate dataCadastro;
+
+    /* @JsonIgnore é uma notation para que o json não serialize os eventos */
+    @JsonIgnore
+    private List<Evento> eventos = new ArrayList<>();
+
+    public Usuario() {
+    }
 
     public Usuario(Long id, String nome, String email) {
         this.id = id;
@@ -35,7 +47,7 @@ public class Usuario implements Serializable {
     public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo,
             String uf, String cidade, String rua, String numero, String bairro, String cep,
             Double peso, Double altura, String foto, String tipoUsuario, String nomeContato,
-            String telefoneEstabelecimento, String celular) {
+            String telefoneEstabelecimento, String celular, LocalDate dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -54,6 +66,7 @@ public class Usuario implements Serializable {
         this.nomeContato = nomeContato;
         this.telefoneEstabelecimento = telefoneEstabelecimento;
         this.celular = celular;
+        this.dataCadastro = dataCadastro;
     }
 
     /**
@@ -306,6 +319,27 @@ public class Usuario implements Serializable {
      */
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    /**
+     * @return String return the dataCadastro
+     */
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    /**
+     * @param dataCadastro the dataCadastro to set
+     */
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    /**
+     * @return List return the eventos
+     */
+    public List<Evento> getEventos() {
+        return eventos;
     }
 
     @Override

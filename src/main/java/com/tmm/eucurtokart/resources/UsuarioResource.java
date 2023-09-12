@@ -1,7 +1,5 @@
 package com.tmm.eucurtokart.resources;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ public class UsuarioResource {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> getfindAll() {
+    public ResponseEntity<List<Usuario>> getFindAll() {
         List<Usuario> list = usuarioRepository.findAll();
         return ResponseEntity.ok().body(list);
     }
