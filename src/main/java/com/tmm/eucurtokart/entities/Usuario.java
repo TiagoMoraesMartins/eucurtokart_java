@@ -31,6 +31,7 @@ public class Usuario implements Serializable {
     private String celular;
     private LocalDate dataCadastro;
     private boolean ativo;
+    private String descricao;
 
     /* @JsonIgnore é uma notation para que o json não serialize os eventos */
     @JsonIgnore
@@ -41,6 +42,9 @@ public class Usuario implements Serializable {
 
     @JsonIgnore
     private List<Comentario> comentarios = new ArrayList<>();
+
+    @JsonIgnore
+    private List<UsuarioSeguidor> usuariosSeguidores = new ArrayList<>();
 
     public Usuario() {
     }
@@ -54,8 +58,7 @@ public class Usuario implements Serializable {
     public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo, String uf, String cidade,
             String rua, String numero, String bairro, String cep, Double peso, Double altura, String foto,
             String tipoUsuario, String nomeContato, String telefoneEstabelecimento, String celular,
-            LocalDate dataCadastro, boolean ativo, List<Evento> eventos, List<Postagem> postagens,
-            List<Comentario> comentarios, List<FotoPostagem> fotosPostagem) {
+            LocalDate dataCadastro, boolean ativo, String descricao) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -76,6 +79,7 @@ public class Usuario implements Serializable {
         this.celular = celular;
         this.dataCadastro = dataCadastro;
         this.ativo = ativo;
+        this.descricao = descricao;
 
     }
 
@@ -239,6 +243,14 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public List<Evento> getEventos() {
         return eventos;
     }
@@ -249,6 +261,10 @@ public class Usuario implements Serializable {
 
     public List<Comentario> getComentarios() {
         return comentarios;
+    }
+
+    public List<UsuarioSeguidor> getUsuariosSeguidores() {
+        return usuariosSeguidores;
     }
 
     @Override
