@@ -9,19 +9,20 @@ public class Comentario {
     private Long id;
     private String descricao;
     private LocalDate dataComentario;
-
+    private boolean ativo;
     private Postagem postagem;
-
     private Usuario usuario;
 
     public Comentario() {
 
     }
 
-    public Comentario(Long id, String descricao, LocalDate dataComentario, Postagem postagem, Usuario usuario) {
+    public Comentario(Long id, String descricao, LocalDate dataComentario, boolean ativo, Postagem postagem,
+            Usuario usuario) {
         this.id = id;
         this.descricao = descricao;
         this.dataComentario = dataComentario;
+        this.ativo = ativo;
         this.postagem = postagem;
         this.usuario = usuario;
     }
@@ -48,6 +49,14 @@ public class Comentario {
 
     public void setDataComentario(LocalDate dataComentario) {
         this.dataComentario = dataComentario;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public Postagem getPostagem() {

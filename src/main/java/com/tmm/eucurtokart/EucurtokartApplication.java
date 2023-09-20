@@ -10,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tmm.eucurtokart.entities.Comentario;
 import com.tmm.eucurtokart.entities.Evento;
+import com.tmm.eucurtokart.entities.FotoPostagem;
 import com.tmm.eucurtokart.entities.Postagem;
 import com.tmm.eucurtokart.entities.Usuario;
 import com.tmm.eucurtokart.repositories.ComentarioRepository;
 import com.tmm.eucurtokart.repositories.EventoRepository;
+import com.tmm.eucurtokart.repositories.FotoPostagemRepository;
 import com.tmm.eucurtokart.repositories.PostagemRepository;
 import com.tmm.eucurtokart.repositories.UsuarioRepository;
 
@@ -32,6 +34,9 @@ public class EucurtokartApplication implements CommandLineRunner {
 	@Autowired
 	private ComentarioRepository comentarioRepository;
 
+	@Autowired
+	private FotoPostagemRepository fotoPostagemRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(EucurtokartApplication.class, args);
 		System.out.println("Projeto Eucurtokart");
@@ -46,13 +51,20 @@ public class EucurtokartApplication implements CommandLineRunner {
 		Evento evento2 = new Evento(2L, "Kart Pinhais", "Nessa sexta-feira teremos...", usuario1);
 		Evento evento3 = new Evento(3L, "Kart São José", "Nesse domingo iniciaremos um novo...", usuario2);
 
-		Postagem postagem1 = new Postagem(1L, "Descrição da postagem 1", LocalDate.now(), usuario1);
-		Postagem postagem2 = new Postagem(2L, "Descrição da postagem 2", LocalDate.now(), usuario2);
-		Postagem postagem3 = new Postagem(3L, "Descrição da postagem 3", LocalDate.now(), usuario1);
+		Postagem postagem1 = new Postagem(1L, "Descrição da postagem 1", LocalDate.now(), true, usuario1);
+		Postagem postagem2 = new Postagem(2L, "Descrição da postagem 2", LocalDate.now(), true, usuario2);
+		Postagem postagem3 = new Postagem(3L, "Descrição da postagem 3", LocalDate.now(), true, usuario1);
 
-		Comentario comentario1 = new Comentario(1L, "Descrição do comentário 1", LocalDate.now(), postagem1, usuario1);
-		Comentario comentario2 = new Comentario(2L, "Descrição do comentário 2", LocalDate.now(), postagem2, usuario2);
-		Comentario comentario3 = new Comentario(3L, "Descrição do comentário 3", LocalDate.now(), postagem3, usuario1);
+		Comentario comentario1 = new Comentario(1L, "Descrição do comentário 1", LocalDate.now(), true, postagem1,
+				usuario1);
+		Comentario comentario2 = new Comentario(2L, "Descrição do comentário 2", LocalDate.now(), true, postagem2,
+				usuario2);
+		Comentario comentario3 = new Comentario(3L, "Descrição do comentário 3", LocalDate.now(), true, postagem3,
+				usuario1);
+
+		FotoPostagem fotoPostagem1 = new FotoPostagem(1L, "foto.jpg", true, LocalDate.now(), postagem1);
+		FotoPostagem fotoPostagem2 = new FotoPostagem(2L, "foto.png", true, LocalDate.now(), postagem2);
+		FotoPostagem fotoPostagem3 = new FotoPostagem(3L, "foto.svg", true, LocalDate.now(), postagem3);
 
 		usuario1.getEventos().addAll(Arrays.asList(evento1, evento2));
 		usuario2.getEventos().addAll(Arrays.asList(evento3));
@@ -62,6 +74,10 @@ public class EucurtokartApplication implements CommandLineRunner {
 
 		usuario1.getComentarios().addAll(Arrays.asList(comentario1, comentario2));
 		usuario2.getComentarios().addAll(Arrays.asList(comentario3));
+
+		postagem1.getFotosPostagem().addAll(Arrays.asList(fotoPostagem1));
+		postagem2.getFotosPostagem().addAll(Arrays.asList(fotoPostagem2));
+		postagem3.getFotosPostagem().addAll(Arrays.asList(fotoPostagem3));
 
 		usuarioRepository.save(usuario1);
 		usuarioRepository.save(usuario2);
@@ -77,6 +93,10 @@ public class EucurtokartApplication implements CommandLineRunner {
 		comentarioRepository.save(comentario1);
 		comentarioRepository.save(comentario2);
 		comentarioRepository.save(comentario3);
+
+		fotoPostagemRepository.save(fotoPostagem1);
+		fotoPostagemRepository.save(fotoPostagem2);
+		fotoPostagemRepository.save(fotoPostagem3);
 
 	}
 

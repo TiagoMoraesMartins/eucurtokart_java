@@ -30,6 +30,7 @@ public class Usuario implements Serializable {
     private String telefoneEstabelecimento;
     private String celular;
     private LocalDate dataCadastro;
+    private boolean ativo;
 
     /* @JsonIgnore é uma notation para que o json não serialize os eventos */
     @JsonIgnore
@@ -50,10 +51,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo,
-            String uf, String cidade, String rua, String numero, String bairro, String cep,
-            Double peso, Double altura, String foto, String tipoUsuario, String nomeContato,
-            String telefoneEstabelecimento, String celular, LocalDate dataCadastro) {
+    public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo, String uf, String cidade,
+            String rua, String numero, String bairro, String cep, Double peso, Double altura, String foto,
+            String tipoUsuario, String nomeContato, String telefoneEstabelecimento, String celular,
+            LocalDate dataCadastro, boolean ativo, List<Evento> eventos, List<Postagem> postagens,
+            List<Comentario> comentarios, List<FotoPostagem> fotosPostagem) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -73,6 +75,8 @@ public class Usuario implements Serializable {
         this.telefoneEstabelecimento = telefoneEstabelecimento;
         this.celular = celular;
         this.dataCadastro = dataCadastro;
+        this.ativo = ativo;
+
     }
 
     public Long getId() {
@@ -225,6 +229,14 @@ public class Usuario implements Serializable {
 
     public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public List<Evento> getEventos() {

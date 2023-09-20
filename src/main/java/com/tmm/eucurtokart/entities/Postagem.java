@@ -15,20 +15,24 @@ public class Postagem implements Serializable {
 	private Long id;
 	private String descricao;
 	private LocalDate dataCadastro;
-
+	private boolean ativo;
 	private Usuario usuario;
 
 	@JsonIgnore
 	private List<Comentario> comentarios = new ArrayList<>();
 
+	@JsonIgnore
+	private List<FotoPostagem> fotosPostagem = new ArrayList<>();
+
 	public Postagem() {
 
 	}
 
-	public Postagem(Long id, String descricao, LocalDate dataCadastro, Usuario usuario) {
+	public Postagem(Long id, String descricao, LocalDate dataCadastro, boolean ativo, Usuario usuario) {
 		this.id = id;
 		this.descricao = descricao;
 		this.dataCadastro = dataCadastro;
+		this.ativo = ativo;
 		this.usuario = usuario;
 	}
 
@@ -56,6 +60,14 @@ public class Postagem implements Serializable {
 		this.dataCadastro = dataCadastro;
 	}
 
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -66,6 +78,10 @@ public class Postagem implements Serializable {
 
 	public List<Comentario> getComentarios() {
 		return comentarios;
+	}
+
+	public List<FotoPostagem> getFotosPostagem() {
+		return fotosPostagem;
 	}
 
 	@Override
