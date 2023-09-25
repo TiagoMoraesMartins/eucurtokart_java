@@ -2,6 +2,10 @@ package com.tmm.eucurtokart.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Evento implements Serializable {
 
@@ -19,6 +23,9 @@ public class Evento implements Serializable {
     private LocalDate dataCadastro;
     private boolean ativo;
     private Usuario usuario;
+
+    @JsonIgnore
+    private List<FotoEvento> fotosEvento = new ArrayList<>();
 
     public Evento() {
     }
@@ -141,6 +148,10 @@ public class Evento implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<FotoEvento> getFotosEvento() {
+        return fotosEvento;
     }
 
     @Override

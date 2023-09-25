@@ -10,12 +10,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tmm.eucurtokart.entities.Comentario;
 import com.tmm.eucurtokart.entities.Evento;
+import com.tmm.eucurtokart.entities.FotoEvento;
 import com.tmm.eucurtokart.entities.FotoPostagem;
 import com.tmm.eucurtokart.entities.Postagem;
 import com.tmm.eucurtokart.entities.Usuario;
 import com.tmm.eucurtokart.entities.UsuarioSeguidor;
 import com.tmm.eucurtokart.repositories.ComentarioRepository;
 import com.tmm.eucurtokart.repositories.EventoRepository;
+import com.tmm.eucurtokart.repositories.FotoEventoRepository;
 import com.tmm.eucurtokart.repositories.FotoPostagemRepository;
 import com.tmm.eucurtokart.repositories.PostagemRepository;
 import com.tmm.eucurtokart.repositories.UsuarioRepository;
@@ -41,6 +43,9 @@ public class EucurtokartApplication implements CommandLineRunner {
 
 	@Autowired
 	private UsuarioSeguidorRepository usuarioSeguidorRepository;
+
+	@Autowired
+	private FotoEventoRepository fotoEventoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EucurtokartApplication.class, args);
@@ -76,6 +81,10 @@ public class EucurtokartApplication implements CommandLineRunner {
 		UsuarioSeguidor usuarioSeguidor2 = new UsuarioSeguidor(2L, true, LocalDate.now(), usuario1);
 		UsuarioSeguidor usuarioSeguidor3 = new UsuarioSeguidor(3L, true, LocalDate.now(), usuario3);
 
+		FotoEvento fotoEvento1 = new FotoEvento(1L, evento1, "foto1.png", LocalDate.now(), true);
+		FotoEvento fotoEvento2 = new FotoEvento(2L, evento1, "foto2.png", LocalDate.now(), true);
+		FotoEvento fotoEvento3 = new FotoEvento(3L, evento2, "foto1.png", LocalDate.now(), true);
+
 		usuario1.getEventos().addAll(Arrays.asList(evento1, evento2));
 		usuario2.getEventos().addAll(Arrays.asList(evento3));
 
@@ -91,6 +100,9 @@ public class EucurtokartApplication implements CommandLineRunner {
 		postagem1.getFotosPostagem().addAll(Arrays.asList(fotoPostagem1));
 		postagem2.getFotosPostagem().addAll(Arrays.asList(fotoPostagem2));
 		postagem3.getFotosPostagem().addAll(Arrays.asList(fotoPostagem3));
+
+		evento1.getFotosEvento().addAll(Arrays.asList(fotoEvento1, fotoEvento2));
+		evento2.getFotosEvento().addAll(Arrays.asList(fotoEvento3));
 
 		usuarioRepository.save(usuario1);
 		usuarioRepository.save(usuario2);
@@ -114,6 +126,10 @@ public class EucurtokartApplication implements CommandLineRunner {
 		usuarioSeguidorRepository.save(usuarioSeguidor1);
 		usuarioSeguidorRepository.save(usuarioSeguidor2);
 		usuarioSeguidorRepository.save(usuarioSeguidor3);
+
+		fotoEventoRepository.save(fotoEvento1);
+		fotoEventoRepository.save(fotoEvento2);
+		fotoEventoRepository.save(fotoEvento3);
 
 	}
 
