@@ -27,6 +27,12 @@ public class Evento implements Serializable {
     @JsonIgnore
     private List<FotoEvento> fotosEvento = new ArrayList<>();
 
+    @JsonIgnore
+    private List<ResultadoEvento> resultadosEvento = new ArrayList<>();
+
+    @JsonIgnore
+    private List<ParticipanteEvento> participantesEvento = new ArrayList<>();
+
     public Evento() {
     }
 
@@ -152,6 +158,14 @@ public class Evento implements Serializable {
 
     public List<FotoEvento> getFotosEvento() {
         return fotosEvento;
+    }
+
+    public List<ResultadoEvento> getResultadosEvento() {
+        return resultadosEvento;
+    }
+
+    public List<ParticipanteEvento> getParticipantesEvento() {
+        return participantesEvento;
     }
 
     @Override

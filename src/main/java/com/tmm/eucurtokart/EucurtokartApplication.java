@@ -12,14 +12,18 @@ import com.tmm.eucurtokart.entities.Comentario;
 import com.tmm.eucurtokart.entities.Evento;
 import com.tmm.eucurtokart.entities.FotoEvento;
 import com.tmm.eucurtokart.entities.FotoPostagem;
+import com.tmm.eucurtokart.entities.ParticipanteEvento;
 import com.tmm.eucurtokart.entities.Postagem;
+import com.tmm.eucurtokart.entities.ResultadoEvento;
 import com.tmm.eucurtokart.entities.Usuario;
 import com.tmm.eucurtokart.entities.UsuarioSeguidor;
 import com.tmm.eucurtokart.repositories.ComentarioRepository;
 import com.tmm.eucurtokart.repositories.EventoRepository;
 import com.tmm.eucurtokart.repositories.FotoEventoRepository;
 import com.tmm.eucurtokart.repositories.FotoPostagemRepository;
+import com.tmm.eucurtokart.repositories.ParticipanteEventoRepository;
 import com.tmm.eucurtokart.repositories.PostagemRepository;
+import com.tmm.eucurtokart.repositories.ResultadoEventoRepository;
 import com.tmm.eucurtokart.repositories.UsuarioRepository;
 import com.tmm.eucurtokart.repositories.UsuarioSeguidorRepository;
 
@@ -46,6 +50,12 @@ public class EucurtokartApplication implements CommandLineRunner {
 
 	@Autowired
 	private FotoEventoRepository fotoEventoRepository;
+
+	@Autowired
+	private ParticipanteEventoRepository participanteEventoRepository;
+
+	@Autowired
+	private ResultadoEventoRepository resultadoEventoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EucurtokartApplication.class, args);
@@ -85,6 +95,20 @@ public class EucurtokartApplication implements CommandLineRunner {
 		FotoEvento fotoEvento2 = new FotoEvento(2L, evento1, "foto2.png", LocalDate.now(), true);
 		FotoEvento fotoEvento3 = new FotoEvento(3L, evento2, "foto1.png", LocalDate.now(), true);
 
+		ParticipanteEvento participanteEvento1 = new ParticipanteEvento(1L, evento1, usuario1, true, LocalDate.now(),
+				LocalDate.now(), true);
+		ParticipanteEvento participanteEvento2 = new ParticipanteEvento(2L, evento1, usuario2, true, LocalDate.now(),
+				LocalDate.now(), true);
+		ParticipanteEvento participanteEvento3 = new ParticipanteEvento(3L, evento1, usuario3, true, LocalDate.now(),
+				LocalDate.now(), true);
+
+		ResultadoEvento resultadoEvento1 = new ResultadoEvento(1L, evento1, "Primeiro Lugar", LocalDate.now(),
+				true, participanteEvento1);
+		ResultadoEvento resultadoEvento2 = new ResultadoEvento(2L, evento1, "Segundo lugar", LocalDate.now(),
+				true, participanteEvento2);
+		ResultadoEvento resultadoEvento3 = new ResultadoEvento(3L, evento1, "Terceiro lugar", LocalDate.now(),
+				true, participanteEvento3);
+
 		usuario1.getEventos().addAll(Arrays.asList(evento1, evento2));
 		usuario2.getEventos().addAll(Arrays.asList(evento3));
 
@@ -103,6 +127,11 @@ public class EucurtokartApplication implements CommandLineRunner {
 
 		evento1.getFotosEvento().addAll(Arrays.asList(fotoEvento1, fotoEvento2));
 		evento2.getFotosEvento().addAll(Arrays.asList(fotoEvento3));
+
+		evento1.getParticipantesEvento()
+				.addAll(Arrays.asList(participanteEvento1, participanteEvento2, participanteEvento3));
+
+		evento1.getResultadosEvento().addAll(Arrays.asList(resultadoEvento1, resultadoEvento2, resultadoEvento3));
 
 		usuarioRepository.save(usuario1);
 		usuarioRepository.save(usuario2);
@@ -130,6 +159,14 @@ public class EucurtokartApplication implements CommandLineRunner {
 		fotoEventoRepository.save(fotoEvento1);
 		fotoEventoRepository.save(fotoEvento2);
 		fotoEventoRepository.save(fotoEvento3);
+
+		participanteEventoRepository.save(participanteEvento1);
+		participanteEventoRepository.save(participanteEvento2);
+		participanteEventoRepository.save(participanteEvento3);
+
+		resultadoEventoRepository.save(resultadoEvento1);
+		resultadoEventoRepository.save(resultadoEvento2);
+		resultadoEventoRepository.save(resultadoEvento3);
 
 	}
 
