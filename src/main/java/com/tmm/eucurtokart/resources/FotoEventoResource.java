@@ -27,7 +27,7 @@ public class FotoEventoResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<FotoEvento> findById(@PathVariable Long id) {
-        FotoEvento fotoEvento = fotoEventoRepository.findById(id);
+        FotoEvento fotoEvento = fotoEventoRepository.findById(id).get();
         return ResponseEntity.ok().body(fotoEvento);
     }
 }

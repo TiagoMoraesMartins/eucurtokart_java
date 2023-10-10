@@ -8,20 +8,37 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Postagem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String descricao;
 	private LocalDate dataCadastro;
 	private boolean ativo;
+
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	@JsonIgnore
+	@OneToMany(mappedBy = "postagem")
 	private List<Comentario> comentarios = new ArrayList<>();
 
 	@JsonIgnore
+	@OneToMany(mappedBy = "postagem")
 	private List<FotoPostagem> fotosPostagem = new ArrayList<>();
 
 	public Postagem() {

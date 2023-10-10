@@ -1,32 +1,44 @@
 package com.tmm.eucurtokart.entities;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class ParticipanteEvento {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_evento")
     private Evento evento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
     private boolean confirmado;
     private LocalDate dataAtualizacao;
     private LocalDate dataCadastro;
     private boolean ativo;
-
-    @JsonIgnore
-    private List<ResultadoEvento> resultadosEvento = new ArrayList<>();
+    private String posicao;
+    private LocalDate melhorVolta;
 
     public ParticipanteEvento() {
 
     }
 
     public ParticipanteEvento(Long id, Evento evento, Usuario usuario, boolean confirmado, LocalDate dataAtualizacao,
-            LocalDate dataCadastro, boolean ativo) {
+            LocalDate dataCadastro, boolean ativo, String posicao, LocalDate melhorVolta) {
         this.id = id;
         this.evento = evento;
         this.usuario = usuario;
@@ -34,6 +46,8 @@ public class ParticipanteEvento {
         this.dataAtualizacao = dataAtualizacao;
         this.dataCadastro = dataCadastro;
         this.ativo = ativo;
+        this.posicao = posicao;
+        this.melhorVolta = melhorVolta;
     }
 
     public Long getId() {
@@ -92,8 +106,20 @@ public class ParticipanteEvento {
         this.ativo = ativo;
     }
 
-    public List<ResultadoEvento> getResultadosEvento() {
-        return resultadosEvento;
+    public String getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(String posicao) {
+        this.posicao = posicao;
+    }
+
+    public LocalDate getMelhorVolta() {
+        return melhorVolta;
+    }
+
+    public void setMelhorVolta(LocalDate melhorVolta) {
+        this.melhorVolta = melhorVolta;
     }
 
     @Override

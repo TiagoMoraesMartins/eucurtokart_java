@@ -1,28 +1,11 @@
 package com.tmm.eucurtokart.repositories;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.tmm.eucurtokart.entities.FotoEvento;
 
-@Component
-public class FotoEventoRepository {
+@Repository
+public interface FotoEventoRepository extends JpaRepository<FotoEvento, Long> {
 
-    private Map<Long, FotoEvento> map = new HashMap<>();
-
-    public void save(FotoEvento fotoEvento) {
-        map.put(fotoEvento.getId(), fotoEvento);
-    }
-
-    public FotoEvento findById(Long id) {
-        return map.get(id);
-    }
-
-    public List<FotoEvento> findAll() {
-        return new ArrayList<FotoEvento>(map.values());
-    }
 }

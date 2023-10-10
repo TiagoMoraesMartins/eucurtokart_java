@@ -27,7 +27,7 @@ public class FotoPostagemResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<FotoPostagem> findById(@PathVariable Long id) {
-        FotoPostagem fotoPostagem = fotoPostagemRepository.findById(id);
+        FotoPostagem fotoPostagem = fotoPostagemRepository.findById(id).get();
         return ResponseEntity.ok().body(fotoPostagem);
 
     }

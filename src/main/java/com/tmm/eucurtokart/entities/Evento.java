@@ -7,10 +7,21 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String descricao;
@@ -22,15 +33,17 @@ public class Evento implements Serializable {
     private boolean realizado;
     private LocalDate dataCadastro;
     private boolean ativo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "evento")
     private List<FotoEvento> fotosEvento = new ArrayList<>();
 
     @JsonIgnore
-    private List<ResultadoEvento> resultadosEvento = new ArrayList<>();
-
-    @JsonIgnore
+    @OneToMany(mappedBy = "evento")
     private List<ParticipanteEvento> participantesEvento = new ArrayList<>();
 
     public Evento() {
@@ -158,10 +171,6 @@ public class Evento implements Serializable {
 
     public List<FotoEvento> getFotosEvento() {
         return fotosEvento;
-    }
-
-    public List<ResultadoEvento> getResultadosEvento() {
-        return resultadosEvento;
     }
 
     public List<ParticipanteEvento> getParticipantesEvento() {

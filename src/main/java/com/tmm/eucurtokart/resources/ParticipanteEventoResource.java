@@ -27,7 +27,7 @@ public class ParticipanteEventoResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ParticipanteEvento> findById(@PathVariable Long id) {
-        ParticipanteEvento participanteEvento = participanteEventoRepository.findById(id);
+        ParticipanteEvento participanteEvento = participanteEventoRepository.findById(id).get();
         return ResponseEntity.ok().body(participanteEvento);
     }
 }

@@ -27,7 +27,7 @@ public class ComentarioResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Comentario> findById(@PathVariable Long id) {
-        Comentario comentario = comentarioRepository.findById(id);
+        Comentario comentario = comentarioRepository.findById(id).get();
         return ResponseEntity.ok().body(comentario);
     }
 

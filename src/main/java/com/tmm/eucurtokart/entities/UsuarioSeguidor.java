@@ -2,13 +2,26 @@ package com.tmm.eucurtokart.entities;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class UsuarioSeguidor {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean ativo;
     private LocalDate dataCadastro;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     public UsuarioSeguidor() {

@@ -7,44 +7,52 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private LocalDate dataNascimento;
     private String sexo;
-    private String uf;
-    private String cidade;
-    private String rua;
-    private String numero;
-    private String bairro;
-    private String cep;
     private Double peso;
     private Double altura;
     private String foto;
     private String tipoUsuario;
-    private String nomeContato;
-    private String telefoneEstabelecimento;
-    private String celular;
     private LocalDate dataCadastro;
     private boolean ativo;
     private String descricao;
 
     /* @JsonIgnore é uma notation para que o json não serialize os eventos */
     @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<Evento> eventos = new ArrayList<>();
 
     @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<Postagem> postagens = new ArrayList<>();
 
     @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<Comentario> comentarios = new ArrayList<>();
 
     @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<UsuarioSeguidor> usuariosSeguidores = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
+    private List<ParticipanteEvento> participantesEvento = new ArrayList<>();
 
     public Usuario() {
     }
@@ -55,28 +63,17 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo, String uf, String cidade,
-            String rua, String numero, String bairro, String cep, Double peso, Double altura, String foto,
-            String tipoUsuario, String nomeContato, String telefoneEstabelecimento, String celular,
-            LocalDate dataCadastro, boolean ativo, String descricao) {
+    public Usuario(Long id, String nome, String email, LocalDate dataNascimento, String sexo, Double peso,
+            Double altura, String foto, String tipoUsuario, LocalDate dataCadastro, boolean ativo, String descricao) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
-        this.uf = uf;
-        this.cidade = cidade;
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cep = cep;
         this.peso = peso;
         this.altura = altura;
         this.foto = foto;
         this.tipoUsuario = tipoUsuario;
-        this.nomeContato = nomeContato;
-        this.telefoneEstabelecimento = telefoneEstabelecimento;
-        this.celular = celular;
         this.dataCadastro = dataCadastro;
         this.ativo = ativo;
         this.descricao = descricao;
@@ -123,54 +120,6 @@ public class Usuario implements Serializable {
         this.sexo = sexo;
     }
 
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
     public Double getPeso() {
         return peso;
     }
@@ -201,30 +150,6 @@ public class Usuario implements Serializable {
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    public String getNomeContato() {
-        return nomeContato;
-    }
-
-    public void setNomeContato(String nomeContato) {
-        this.nomeContato = nomeContato;
-    }
-
-    public String getTelefoneEstabelecimento() {
-        return telefoneEstabelecimento;
-    }
-
-    public void setTelefoneEstabelecimento(String telefoneEstabelecimento) {
-        this.telefoneEstabelecimento = telefoneEstabelecimento;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
     }
 
     public LocalDate getDataCadastro() {
@@ -265,6 +190,10 @@ public class Usuario implements Serializable {
 
     public List<UsuarioSeguidor> getUsuariosSeguidores() {
         return usuariosSeguidores;
+    }
+
+    public List<ParticipanteEvento> getParticipantesEvento() {
+        return participantesEvento;
     }
 
     @Override
